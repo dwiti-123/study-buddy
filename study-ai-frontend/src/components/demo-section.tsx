@@ -494,7 +494,7 @@ export default function DemoSection() {
         <section id="demo" className="lp-section lp-demo-section">
             <div className="lp-wrap">
                 {/* ── header ── */}
-                <div className="lp-section-head center lp-reveal" style={{ marginBottom: 48 }}>
+                <div className="lp-section-head center" style={{ marginBottom: 48 }}>
                     <span className="lp-kicker">Try it yourself</span>
                     <h2>See what StudyBuddy does with real content.</h2>
                     <p>

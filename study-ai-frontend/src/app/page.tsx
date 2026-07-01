@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import DemoSection from "@/components/demo-section";
@@ -8,6 +8,8 @@ import DemoSection from "@/components/demo-section";
 export default function LandingPage() {
   const router = useRouter();
   const revealRefs = useRef<HTMLElement[]>([]);
+  const [visitorCount, setVisitorCount] = useState<number | null>(null);
+  const hasFetchedCount = useRef(false);
 
   const addReveal = (el: HTMLElement | null) => {
     if (el && !revealRefs.current.includes(el)) {
@@ -31,6 +33,19 @@ export default function LandingPage() {
     revealRefs.current.forEach((el) => el && obs.observe(el));
 
     return () => obs.disconnect();
+  }, []);
+
+  // Fetch + increment the visitor count once per real page load
+  useEffect(() => {
+    if (hasFetchedCount.current) return;
+    hasFetchedCount.current = true;
+
+    fetch("/api/visitor-count")
+      .then((res) => res.json())
+      .then((data) => setVisitorCount(data.count))
+      .catch(() => {
+        // fail silently — badge just won't render
+      });
   }, []);
 
   const goToSignIn = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -79,8 +94,15 @@ export default function LandingPage() {
         <div className="lp-wrap">
           <div>
             <span className="lp-eyebrow">
-              <span className="lp-eyebrow-dot"></span>Trusted by 2,400+ students
+              <span className="lp-eyebrow-dot"></span>Trusted by  students
             </span>
+
+            {visitorCount !== null && (
+              <span className="lp-visitor-badge">
+                You're visitor #{visitorCount.toLocaleString()}
+              </span>
+            )}
+
             <h1>
               Paste a link.
               <br />
@@ -182,7 +204,7 @@ export default function LandingPage() {
       <div className="lp-strip">
         <div className="lp-wrap">
           <span>
-            <strong>2,400+</strong> students learning smarter
+             students learning smarter
           </span>
           <span>
             <strong>3 formats</strong> — YouTube, text, and notes
@@ -472,7 +494,7 @@ export default function LandingPage() {
           </p>
           <div ref={addReveal}>
             <Link
-              href="/studyresource"
+              href="/login"
               className="lp-btn-primary lp-reveal"
               style={{ display: "inline-flex" }}
               ref={addReveal}
@@ -520,7 +542,6 @@ export default function LandingPage() {
             <a href="#how">How it works</a>
             <a href="#sources">Sources</a>
             <a href="#faq">FAQ</a>
-            <a href="#">Privacy</a>
           </div>
         </div>
       </footer>
