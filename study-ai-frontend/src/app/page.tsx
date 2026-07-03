@@ -122,7 +122,7 @@ export default function LandingPage() {
               spend your time learning instead of formatting notes.
             </p>
             <div className="lp-hero-ctas">
-              <Link href="/studyresource" className="lp-btn-primary">
+              <Link href="/login" className="lp-btn-primary">
                 Create your first resource
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
                   <path
