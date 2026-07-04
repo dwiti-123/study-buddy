@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_BASE_URL =
-  `${process.env.NEXT_PUBLIC_API_URL}/api/quiz` || "http://localhost:3000/api/quiz";
-
+const API_BASE_URL = `${
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+}/api/quiz`;
 // Always include cookies for auth
 axios.defaults.withCredentials = true;
 
