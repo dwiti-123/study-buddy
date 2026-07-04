@@ -97,14 +97,14 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     res.cookie("accesstoken",accessToken,{
       httpOnly:true,
       secure:true,
-      sameSite:true,
+     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge:7 * 24 * 60 * 60 * 1000,
     });
 
     res.cookie("refreshtoken",refreshToken,{
       httpOnly:true,
       secure:true,
-      sameSite:true,
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge:15*24*60*60*1000
     })
 
