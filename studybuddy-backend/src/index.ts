@@ -16,8 +16,11 @@ app.use(cookieParser());
 //  CORS setup
 app.use(
   cors({
-    origin: "http://localhost:3001", // your frontend URL
-    credentials: true, // needed if you use cookies
+    origin: [
+      "http://localhost:3001",
+      "https://study-buddy-psi-virid.vercel.app",
+    ],
+    credentials: true,
   })
 );
 

@@ -146,7 +146,7 @@ export default function LoginPage() {
             style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
           >
             <Users className="h-3 w-3" />
-            2,400+ students learning smarter
+            students learning smarter
           </div>
         </div>
 
@@ -295,7 +295,7 @@ export default function LoginPage() {
           {/* Social proof — mobile only */}
           <div className="mt-5 flex items-center justify-center gap-1.5 text-[11px] text-gray-400 md:hidden">
             <Users className="h-3 w-3" />
-            2,400+ students learning smarter
+            students learning smarter
           </div>
 
           {/* Terms */}
